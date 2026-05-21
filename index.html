@@ -3,234 +3,946 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dyy Game • Top Up & Jual Beli</title>
+
+  <title>DyyGame • Multipage</title>
+
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+  <link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
   <style>
-    body { font-family: 'Inter', system-ui, sans-serif; }
-    section { scroll-margin-top: 80px; }
-    .game-card { transition: all 0.3s ease; }
-    .game-card.active {
-      transform: scale(1.05);
-      border-color: #22d3ee;
-      box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.3);
-    }
-    .nav-link {
-      transition: all 0.3s ease;
-    }
-    .nav-link.active {
-      color: #22d3ee;
-      border-bottom: 2px solid #22d3ee;
-    }
-  </style>
-</head>
-<body class="bg-zinc-950 text-white scroll-smooth">
-
-  <!-- Navbar -->
-  <nav class="bg-black/70 backdrop-blur-xl border-b border-zinc-800 fixed w-full z-50 transition-all duration-300">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 bg-gradient-to-br from-cyan-500 to-purple-600 rounded-2xl flex items-center justify-center text-2xl font-bold">DG</div>
-        <h1 class="text-3xl font-bold tracking-tight">DyyGame</h1>
-      </div>
-      
-      <!-- Desktop Navbar -->
-      <div class="hidden md:flex items-center gap-8 text-lg">
-        <a href="#beranda" onclick="navigateTo('beranda')" class="nav-link active px-3 py-2">Beranda</a>
-        <a href="#topup" onclick="navigateTo('topup')" class="nav-link px-3 py-2">Top Up</a>
-        <a href="#jual" onclick="navigateTo('jual')" class="nav-link px-3 py-2">Jual Beli Akun</a>
-        <a href="#kontak" onclick="navigateTo('kontak')" class="nav-link px-3 py-2">Kontak</a>
-      </div>
-
-      <button onclick="toggleSearch()" 
-              class="px-5 py-3 bg-zinc-900 hover:bg-zinc-800 rounded-3xl flex items-center gap-2">
-        <i class="fas fa-search"></i>
-      </button>
-    </div>
-  </nav>
-
-  <!-- ==================== BERANDA ==================== -->
-  <section id="beranda" class="pt-24 pb-20 bg-gradient-to-br from-zinc-900 via-zinc-950 to-black transition-all duration-700 hover:scale-[1.001]">
-    <div class="max-w-7xl mx-auto px-6 text-center">
-      <h1 class="text-6xl md:text-7xl font-bold mb-6">Top Up Game Instan</h1>
-      <p class="text-2xl text-zinc-400 mb-10">Mobile Legends • Free Fire • Roblox</p>
-      <button onclick="navigateTo('topup')" 
-              class="px-12 py-6 bg-white text-black font-bold text-xl rounded-3xl hover:bg-cyan-400 hover:scale-105 duration-300 shadow-lg hover:shadow-cyan-500/50"
-        Top Up Sekarang →
-      </button>
-    </div>
-  </section>
-
-  <!-- ==================== TOP UP ==================== -->
-  <section id="topup" class="py-20 bg-zinc-900 transition-all duration-700">
-    <div class="max-w-6xl mx-auto px-6">
-      <h2 class="text-4xl font-bold text-center mb-12">Pilih Game untuk Top Up</h2>
-
-      <!-- Game Selection -->
-      <div class="grid grid-cols-3 gap-6 mb-12" id="gameSelection">
-        <div onclick="selectGame(0)" id="game0" class="game-card active bg-zinc-800 border-2 border-cyan-400 rounded-3xl p-6 text-center cursor-pointer hover:scale-105 hover:-translate-y-2 duration-300"
-          <img src="https://m.media-amazon.com/images/M/MV5BODhlZDk5Y2EtMGFhOS00MTQ5LTgwNjgtYTI2ZmE1Y2ZjMDE2XkEyXkFqcGc@._V1_.jpg" class="h-20 mx-auto mb-4">
-          <h3 class="font-bold">Mobile Legends</h3>
-        </div>
-        <div onclick="selectGame(1)" id="game1" class="game-card bg-zinc-800 border-2 border-transparent rounded-3xl p-6 text-center cursor-pointer">
-          <img src="https://play-lh.googleusercontent.com/EJ83sg58Oo2gAjMHFxFVLM6Z53kuH4_R0M7Yq7gts5fWSIlFchUlmskG1vJKMoncmfOxBXcgJyIaO-nak6sO-MM" class="h-20 mx-auto mb-4">
-          <h3 class="font-bold">Free Fire</h3>
-        </div>
-        <div onclick="selectGame(2)" id="game2" class="game-card bg-zinc-800 border-2 border-transparent rounded-3xl p-6 text-center cursor-pointer">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Roblox_Corporation_2025_logo.svg/3840px-Roblox_Corporation_2025_logo.svg.png" class="h-20 mx-auto mb-4">
-          <h3 class="font-bold">Roblox</h3>
-        </div>
-      </div>
-
-      <div class="grid md:grid-cols-2 gap-10">
-        <!-- Form -->
-        <div class="bg-zinc-800 rounded-3xl p-8">
-          <h3 class="text-2xl font-semibold mb-6">Masukkan Data Akun</h3>
-          <div class="space-y-6">
-            <div>
-              <label class="block mb-2 text-sm">User ID / Nickname</label>
-              <input id="userId" type="text" class="w-full bg-zinc-900 border border-zinc-700 rounded-2xl px-6 py-5 focus:border-cyan-400 outline-none" placeholder="Contoh: 12345678" onkeyup="updateSummary()">
-            </div>
-            <div>
-              <label class="block mb-3 text-sm">Pilih Nominal</label>
-              <div class="grid grid-cols-3 gap-3" id="nominalList"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Summary -->
-        <div class="bg-zinc-800 rounded-3xl p-8">
-          <h3 class="text-2xl font-semibold mb-6">Ringkasan Pesanan</h3>
-          <div id="summary" class="space-y-5 text-lg">
-            <div class="flex justify-between"><span class="text-zinc-400">Game</span><span id="summaryGame" class="font-bold">Mobile Legends</span></div>
-            <div class="flex justify-between"><span class="text-zinc-400">User ID</span><span id="summaryId" class="font-bold">-</span></div>
-            <div class="flex justify-between"><span class="text-zinc-400">Nominal</span><span id="summaryNominal" class="font-bold text-emerald-400">-</span></div>
-            <hr class="border-zinc-700">
-            <div class="flex justify-between text-2xl font-bold">
-              <span>Total Bayar</span>
-              <span id="summaryTotal" class="text-emerald-400">Rp 0</span>
-            </div>
-          </div>
-          <button onclick="prosesTopup()" class="w-full mt-10 py-6 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-3xl text-xl font-bold hover:scale-105 transition-all">
-            Top Up Sekarang
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== JUAL BELI AKUN ==================== -->
-  <section id="jual" class="py-20 bg-black transition-all duration-700">
-    <div class="max-w-4xl mx-auto px-6 text-center">
-      <h2 class="text-5xl font-bold mb-8">Jual Beli Akun Game</h2>
-      <p class="text-xl text-zinc-400 mb-12">Jual Beli akun MLBB, Free Fire, atau Roblox dengan harga terbaik</p>
-      <button onclick="alert('Silakan chat admin untuk menjual/membeli akun')" 
-              class="px-16 py-6 bg-white text-black font-bold text-2xl rounded-3xl hover:bg-cyan-400">
-        Jual Beli Akun
-      </button>
-    </div>
-  </section>
-
-  <!-- ==================== KONTAK ==================== -->
-  <section id="kontak" class="py-20 bg-zinc-900 transition-all duration-700">
-    <div class="max-w-5xl mx-auto px-6 text-center">
-      <h2 class="text-5xl font-bold mb-12">Hubungi Kami</h2>
-      <div class="grid md:grid-cols-3 gap-8">
-        <a href="https://wa.me/6281944123178" target="_blank" class="bg-zinc-800 hover:bg-green-600/20 p-10 rounded-3xl transition-all">
-          <i class="fab fa-whatsapp text-6xl text-green-500 mb-4"></i>
-          <h3 class="text-2xl font-semibold">WhatsApp</h3>
-          <p class="text-green-400">+6281944123178</p>
-        </a>
-        <a href="https://instagram.com/hdyyyyy25_" target="_blank" class="bg-zinc-800 hover:bg-pink-600/20 p-10 rounded-3xl transition-all">
-          <i class="fab fa-instagram text-6xl text-pink-500 mb-4"></i>
-          <h3 class="text-2xl font-semibold">Instagram</h3>
-          <p class="text-pink-400">@hdyyyyy25_</p>
-        </a>
-        <a href="mailto:hadyyyyyat25@gmail.com" class="bg-zinc-800 hover:bg-zinc-700 p-10 rounded-3xl transition-all">
-          <i class="fas fa-envelope text-6xl text-zinc-400 mb-4"></i>
-          <h3 class="text-2xl font-semibold">Email</h3>
-          <p class="text-zinc-400">hadyyyyyat25@gmail.com</p>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <script>
-    let selectedGame = 0;
-    let selectedNominal = null;
-
-    const games = ["Mobile Legends", "Free Fire", "Roblox"];
-
-    const nominals = [
-      {qty: "86", price: 15000}, {qty: "172", price: 30000},
-      {qty: "257", price: 45000}, {qty: "344", price: 60000},
-      {qty: "600", price: 100000}, {qty: "1200", price: 200000}
-    ];
-
-    function navigateTo(section) {
-  document.getElementById(section).scrollIntoView({
-    behavior: "smooth"
-  });
-
-  document.querySelectorAll('.nav-link').forEach(link => {
-    link.classList.remove('active');
-
-    if (link.getAttribute('href') === `#${section}`) {
-      link.classList.add('active');
-    }
-  });
-}
-
-    function selectGame(index) {
-      selectedGame = index;
-      document.querySelectorAll('.game-card').forEach((el, i) => {
-        el.classList.toggle('active', i === index);
-      });
-      updateSummary();
+    body{
+      font-family: Arial, sans-serif;
+      overflow-x: hidden;
     }
 
-    function renderNominals() {
-      const container = document.getElementById('nominalList');
-      container.innerHTML = '';
-      nominals.forEach((nom, i) => {
-        const div = document.createElement('div');
-        div.className = `p-4 rounded-2xl text-center cursor-pointer border transition-all ${selectedNominal === i ? 'bg-cyan-500 text-black border-cyan-400' : 'bg-zinc-800 border-zinc-700 hover:border-cyan-400'}`;
-        div.innerHTML = `<p class="font-bold">${nom.qty} Diamond</p><p class="text-emerald-400">Rp ${nom.price.toLocaleString('id-ID')}</p>`;
-        div.onclick = () => { selectedNominal = i; renderNominals(); updateSummary(); };
-        container.appendChild(div);
-      });
+    .page{
+      display: none;
+      min-height: 100vh;
+      animation: fade 0.5s ease;
     }
 
-    function updateSummary() {
-      document.getElementById('summaryGame').textContent = games[selectedGame];
-      document.getElementById('summaryId').textContent = document.getElementById('userId').value || "-";
-      if (selectedNominal !== null) {
-        const nom = nominals[selectedNominal];
-        document.getElementById('summaryNominal').textContent = `${nom.qty} Diamond`;
-        document.getElementById('summaryTotal').textContent = `Rp ${nom.price.toLocaleString('id-ID')}`;
+    .page.active{
+      display: block;
+    }
+
+    @keyframes fade{
+      from{
+        opacity:0;
+        transform: translateY(20px);
+      }
+      to{
+        opacity:1;
+        transform: translateY(0);
       }
     }
 
-    function prosesTopup() {
-      const uid = document.getElementById('userId').value;
-      if (!uid) return alert("Masukkan User ID!");
-      if (selectedNominal === null) return alert("Pilih nominal top up!");
-
-      const nom = nominals[selectedNominal];
-      alert(`✅ Pesanan Top Up berhasil dibuat!\n\nGame: ${games[selectedGame]}\nUser ID: ${uid}\nNominal: ${nom.qty} Diamond\nTotal: Rp ${nom.price.toLocaleString('id-ID')}\n\nSilakan chat admin via WhatsApp untuk pembayaran.`);
+    .navbar{
+      background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #27272a;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 999;
     }
 
-    function toggleSearch() {
-      const keyword = prompt("Cari game atau nominal:");
-      if (keyword) alert(`Mencari: ${keyword}`);
+    .nav-link{
+      position: relative;
+      transition: .3s;
     }
 
-    // Initialize
-    window.onload = () => {
-      renderNominals();
+    .nav-link.active,
+    .nav-link:hover{
+      color: cyan;
+    }
+
+    .nav-link.active::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:-8px;
+      width:100%;
+      height:2px;
+      background: cyan;
+    }
+
+    .hero{
+      min-height: 100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      padding:20px;
+      background:
+      linear-gradient(to bottom right,#18181b,#09090b,#000);
+    }
+
+    .hero h1{
+      font-size:70px;
+      font-weight:bold;
+    }
+
+    .hero p{
+      margin-top:20px;
+      color:#a1a1aa;
+      font-size:24px;
+    }
+
+    .btn{
+      display:inline-block;
+      margin-top:35px;
+      padding:20px 45px;
+      border-radius:20px;
+      font-weight:bold;
+      transition:.3s;
+    }
+
+    .btn-primary{
+      background:white;
+      color:black;
+    }
+
+    .btn-primary:hover{
+      background:cyan;
+      transform:scale(1.05);
+    }
+
+    .container-page{
+      padding-top:130px;
+      max-width:1200px;
+      margin:auto;
+      padding-left:20px;
+      padding-right:20px;
+      padding-bottom:80px;
+    }
+
+    .judul{
+      font-size:50px;
+      font-weight:bold;
+      text-align:center;
+      margin-bottom:50px;
+    }
+
+    .game-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:30px;
+    }
+
+    .game-card{
+      background:#27272a;
+      border:2px solid transparent;
+      border-radius:30px;
+      padding:30px;
+      text-align:center;
+      transition:.3s;
+      cursor:pointer;
+    }
+
+    .game-card:hover{
+      transform:translateY(-10px) scale(1.03);
+      border-color:cyan;
+    }
+
+    .game-card.active{
+      border-color:cyan;
+      box-shadow:0 0 20px rgba(0,255,255,.4);
+    }
+
+    .game-card img{
+      height:120px;
+      margin:auto;
+      margin-bottom:20px;
+      object-fit:contain;
+    }
+
+    .topup-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:30px;
+      margin-top:50px;
+    }
+
+    .box{
+      background:#27272a;
+      border-radius:30px;
+      padding:30px;
+    }
+
+    .nominal-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:15px;
+      margin-top:15px;
+    }
+
+    .nominal{
+      padding:15px;
+      border-radius:20px;
+      text-align:center;
+      border:1px solid #3f3f46;
+      cursor:pointer;
+      transition:.3s;
+      background:#18181b;
+    }
+
+    .nominal:hover{
+      border-color:cyan;
+    }
+
+    .nominal.active{
+      background:cyan;
+      color:black;
+      font-weight:bold;
+    }
+
+    input{
+      width:100%;
+      background:#18181b;
+      border:1px solid #3f3f46;
+      border-radius:20px;
+      padding:18px;
+      margin-top:10px;
+      outline:none;
+    }
+
+    input:focus{
+      border-color:cyan;
+    }
+
+    .kontak-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:30px;
+    }
+
+    .kontak-card{
+      background:#27272a;
+      border-radius:30px;
+      padding:40px;
+      text-align:center;
+      transition:.3s;
+    }
+
+    .kontak-card:hover{
+      transform:translateY(-10px);
+    }
+
+    .kontak-card i{
+      font-size:60px;
+      margin-bottom:20px;
+    }
+
+    @media(max-width:768px){
+
+      .hero h1{
+        font-size:45px;
+      }
+
+      .topup-grid{
+        grid-template-columns:1fr;
+      }
+
+      .nominal-grid{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .menu{
+        gap:15px;
+        font-size:14px;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-zinc-950 text-white">
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-cyan-500 to-purple-600 flex items-center justify-center font-bold text-xl">
+          DG
+        </div>
+
+        <h1 class="text-3xl font-bold">
+          DyyGame
+        </h1>
+      </div>
+
+      <div class="menu flex items-center gap-8">
+
+        <button onclick="showPage('beranda')"
+        class="nav-link active">
+          Beranda
+        </button>
+
+        <button onclick="showPage('topup')"
+        class="nav-link">
+          Top Up
+        </button>
+
+        <button onclick="showPage('jual')"
+        class="nav-link">
+          Jual Beli
+        </button>
+
+        <button onclick="showPage('kontak')"
+        class="nav-link">
+          Kontak
+        </button>
+
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- BERANDA -->
+
+<section id="beranda" class="page active">
+
+  <!-- HERO -->
+  <div class="relative overflow-hidden bg-gradient-to-br from-zinc-900 via-zinc-950 to-black min-h-screen flex items-center">
+
+    <!-- Blur Effect -->
+    <div class="absolute top-[-180px] right-[-180px] w-[520px] h-[520px] bg-cyan-500/25 rounded-full blur-[160px] pointer-events-none"></div>
+
+    <div class="absolute top-[-180px] left-[-180px] w-[520px] h-[520px] bg-blue-900/30 rounded-full blur-[150px] pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-6 py-32 relative z-10 w-full">
+
+      <!-- TEXT -->
+      <div class="text-center">
+
+        <p class="text-cyan-400 font-semibold mb-4 tracking-widest">
+          WEBSITE TOP UP GAME TERPERCAYA
+        </p>
+
+        <h1 class="text-6xl md:text-7xl font-black leading-tight">
+
+          Top Up Game
+          <span class="bg-gradient-to-r from-cyan-400 to-purple-500 text-transparent bg-clip-text">
+            Murah & Instan
+          </span>
+
+        </h1>
+
+        <p class="text-zinc-400 text-xl mt-6 max-w-2xl mx-auto">
+          Top up Mobile Legends, Free Fire, Roblox, PUBG Mobile,
+          Valorant dan game lainnya dengan proses cepat,
+          aman dan terpercaya.
+        </p>
+
+        <!-- BUTTON -->
+        <div class="flex flex-wrap justify-center gap-5 mt-10">
+
+          <button onclick="showPage('topup')"
+          class="px-10 py-5 rounded-2xl bg-cyan-500 hover:bg-cyan-400 text-black font-bold text-lg transition hover:scale-105 shadow-lg shadow-cyan-500/30">
+
+            Top Up Sekarang
+
+          </button>
+
+          <button onclick="showPage('jual')"
+          class="px-10 py-5 rounded-2xl border border-zinc-700 hover:border-cyan-400 bg-zinc-900/50 backdrop-blur-xl text-white font-bold text-lg transition hover:scale-105">
+
+            Jual Beli Akun
+
+          </button>
+
+        </div>
+
+      </div>
+
+      <!-- GAME LIST -->
+      <div class="mt-24">
+
+        <div class="flex items-center justify-between mb-8">
+
+          <h2 class="text-3xl font-bold">
+            List Game
+          </h2>
+
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+
+          <!-- CARD -->
+          <div onclick="showPage('topup')"
+          class="group bg-zinc-900 rounded-3xl overflow-hidden hover:scale-105 transition cursor-pointer border border-zinc-800 hover:border-cyan-400">
+
+            <div class="overflow-hidden">
+              <img
+              src="https://assets-prd.ignimgs.com/2023/09/30/mobilelegends-1696089976653.jpg?crop=1%3A1%2Csmart&format=jpg&auto=webp&quality=80"
+              class="h-44 w-full object-cover group-hover:scale-110 transition duration-500">
+            </div>
+
+            <div class="p-4">
+
+              <h3 class="font-bold text-lg">
+                Mobile Legends
+              </h3>
+
+              <p class="text-zinc-400 text-sm mt-1">
+                Diamond Murah
+              </p>
+
+            </div>
+
+          </div>
+
+          <!-- CARD -->
+          <div onclick="showPage('topup')"
+          class="group bg-zinc-900 rounded-3xl overflow-hidden hover:scale-105 transition cursor-pointer border border-zinc-800 hover:border-orange-400">
+
+            <div class="overflow-hidden">
+              <img
+              src="https://play-lh.googleusercontent.com/EJ83sg58Oo2gAjMHFxFVLM6Z53kuH4_R0M7Yq7gts5fWSIlFchUlmskG1vJKMoncmfOxBXcgJyIaO-nak6sO-MM"
+              class="h-44 w-full object-cover group-hover:scale-110 transition duration-500">
+            </div>
+
+            <div class="p-4">
+
+              <h3 class="font-bold text-lg">
+                Free Fire
+              </h3>
+
+              <p class="text-zinc-400 text-sm mt-1">
+                Diamond Instan
+              </p>
+
+            </div>
+
+          </div>
+
+          <!-- CARD -->
+          <div onclick="showPage('topup')"
+          class="group bg-zinc-900 rounded-3xl overflow-hidden hover:scale-105 transition cursor-pointer border border-zinc-800 hover:border-red-400">
+
+            <div class="overflow-hidden">
+              <img
+              src="https://play-lh.googleusercontent.com/zCSGnBtZk0Lmp1BAbyaZfLktDzHmC6oke67qzz3G1lBegAF2asyt5KzXOJ2PVdHDYkU=w1024"
+              class="h-44 w-full object-cover group-hover:scale-110 transition duration-500">
+            </div>
+
+            <div class="p-4">
+
+              <h3 class="font-bold text-lg">
+                PUBG Mobile
+              </h3>
+
+              <p class="text-zinc-400 text-sm mt-1">
+                UC Termurah
+              </p>
+
+            </div>
+
+          </div>
+
+          <!-- CARD -->
+          <div onclick="showPage('topup')"
+          class="group bg-zinc-900 rounded-3xl overflow-hidden hover:scale-105 transition cursor-pointer border border-zinc-800 hover:border-purple-400">
+
+            <div class="overflow-hidden">
+              <img
+              src="https://store-images.s-microsoft.com/image/apps.21507.13663857844271189.4c1de202-3961-4c40-a0aa-7f4f1388775a.20ed7782-0eda-4f9d-b421-4cc47492edc6"
+              class="h-44 w-full object-cover group-hover:scale-110 transition duration-500">
+            </div>
+
+            <div class="p-4">
+
+              <h3 class="font-bold text-lg">
+                Valorant
+              </h3>
+
+              <p class="text-zinc-400 text-sm mt-1">
+                VP Cepat
+              </p>
+
+            </div>
+
+          </div>
+
+          <!-- CARD -->
+          <div onclick="showPage('topup')"
+          class="group bg-zinc-900 rounded-3xl overflow-hidden hover:scale-105 transition cursor-pointer border border-zinc-800 hover:border-green-400">
+
+            <div class="overflow-hidden">
+              <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Roblox_Corporation_2025_logo.svg/3840px-Roblox_Corporation_2025_logo.svg.png"
+              class="h-44 w-full object-cover group-hover:scale-110 transition duration-500">
+            </div>
+
+            <div class="p-4">
+
+              <h3 class="font-bold text-lg">
+                Roblox
+              </h3>
+
+              <p class="text-zinc-400 text-sm mt-1">
+                Robux Murah
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- KEUNGGULAN -->
+      <div class="grid md:grid-cols-3 gap-8 mt-24">
+
+        <div class="bg-zinc-900/80 backdrop-blur-xl border border-zinc-800 rounded-3xl p-8 hover:border-cyan-400 transition">
+
+          <div class="w-16 h-16 rounded-2xl bg-cyan-500/20 flex items-center justify-center mb-6">
+            <i class="fas fa-bolt text-cyan-400 text-3xl"></i>
+          </div>
+
+          <h3 class="text-2xl font-bold mb-3">
+            Proses Instan
+          </h3>
+
+          <p class="text-zinc-400">
+            Top up diproses otomatis hanya dalam hitungan detik.
+          </p>
+
+        </div>
+
+        <div class="bg-zinc-900/80 backdrop-blur-xl border border-zinc-800 rounded-3xl p-8 hover:border-purple-400 transition">
+
+          <div class="w-16 h-16 rounded-2xl bg-purple-500/20 flex items-center justify-center mb-6">
+            <i class="fas fa-shield-halved text-purple-400 text-3xl"></i>
+          </div>
+
+          <h3 class="text-2xl font-bold mb-3">
+            Aman & Terpercaya
+          </h3>
+
+          <p class="text-zinc-400">
+            Ribuan transaksi berhasil setiap harinya dengan pembayaran aman.
+          </p>
+
+        </div>
+
+        <div class="bg-zinc-900/80 backdrop-blur-xl border border-zinc-800 rounded-3xl p-8 hover:border-emerald-400 transition">
+
+          <div class="w-16 h-16 rounded-2xl bg-emerald-500/20 flex items-center justify-center mb-6">
+            <i class="fas fa-wallet text-emerald-400 text-3xl"></i>
+          </div>
+
+          <h3 class="text-2xl font-bold mb-3">
+            Harga Murah
+          </h3>
+
+          <p class="text-zinc-400">
+            Harga top up lebih hemat dan banyak promo menarik setiap hari.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+  <!-- TOPUP -->
+  <section id="topup" class="page relative overflow-hidden bg-zinc-950">
+
+    <!-- Blur Effect -->
+    <div class="absolute top-[-180px] left-[-180px] w-[520px] h-[520px] bg-blue-900/30 rounded-full blur-[160px] pointer-events-none"></div>
+
+    <div class="absolute bottom-[-220px] right-[-180px] w-[520px] h-[520px] bg-cyan-400/20 rounded-full blur-[160px] pointer-events-none"></div>
+
+    <div class="container-page">
+
+      <h1 class="judul">
+        Pilih Game
+      </h1>
+
+      <div class="game-grid">
+
+        <div onclick="selectGame(0)"
+        class="game-card active">
+
+          <img src="https://m.media-amazon.com/images/M/MV5BODhlZDk5Y2EtMGFhOS00MTQ5LTgwNjgtYTI2ZmE1Y2ZjMDE2XkEyXkFqcGc@._V1_.jpg">
+
+          <h3 class="text-2xl font-bold">
+            Mobile Legends
+          </h3>
+
+        </div>
+
+        <div onclick="selectGame(1)"
+        class="game-card">
+
+          <img src="https://play-lh.googleusercontent.com/zCSGnBtZk0Lmp1BAbyaZfLktDzHmC6oke67qzz3G1lBegAF2asyt5KzXOJ2PVdHDYkU=w1024">
+
+          <h3 class="text-2xl font-bold">
+            PUBG Mobile
+          </h3>
+
+        </div>
+
+        <div onclick="selectGame(2)"
+        class="game-card">
+
+          <img src="https://play-lh.googleusercontent.com/EJ83sg58Oo2gAjMHFxFVLM6Z53kuH4_R0M7Yq7gts5fWSIlFchUlmskG1vJKMoncmfOxBXcgJyIaO-nak6sO-MM">
+
+          <h3 class="text-2xl font-bold">
+            Free Fire
+          </h3>
+
+        </div>
+
+        <div onclick="selectGame(3)"
+        class="game-card">
+
+          <img src="https://store-images.s-microsoft.com/image/apps.21507.13663857844271189.4c1de202-3961-4c40-a0aa-7f4f1388775a.20ed7782-0eda-4f9d-b421-4cc47492edc6">
+
+          <h3 class="text-2xl font-bold">
+            Valorant
+          </h3>
+
+        </div>
+
+        <div onclick="selectGame(4)"
+        class="game-card">
+
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Roblox_Corporation_2025_logo.svg/3840px-Roblox_Corporation_2025_logo.svg.png">
+
+          <h3 class="text-2xl font-bold">
+            Roblox
+          </h3>
+
+        </div>
+
+      </div>
+
+      <!-- TOPUP FORM -->
+      <div class="topup-grid">
+
+        <div class="box">
+
+          <h2 class="text-3xl font-bold mb-6">
+            Masukkan Data
+          </h2>
+
+          <label>User ID</label>
+
+          <input
+          type="text"
+          id="userId"
+          placeholder="Masukkan User ID"
+          onkeyup="updateSummary()">
+
+          <h3 class="mt-8 mb-4 text-xl font-bold">
+            Pilih Nominal
+          </h3>
+
+          <div class="nominal-grid" id="nominalList"></div>
+
+        </div>
+
+        <div class="box">
+
+          <h2 class="text-3xl font-bold mb-6">
+            Ringkasan
+          </h2>
+
+          <div class="space-y-5 text-lg">
+
+            <div class="flex justify-between">
+              <span>Game</span>
+              <span id="summaryGame">
+                Mobile Legends
+              </span>
+            </div>
+
+            <div class="flex justify-between">
+              <span>User ID</span>
+              <span id="summaryId">-</span>
+            </div>
+
+            <div class="flex justify-between">
+              <span>Nominal</span>
+              <span id="summaryNominal">-</span>
+            </div>
+
+            <hr class="border-zinc-700">
+
+            <div class="flex justify-between text-2xl font-bold">
+              <span>Total</span>
+              <span id="summaryTotal">
+                Rp 0
+              </span>
+            </div>
+
+          </div>
+
+          <button onclick="prosesTopup()"
+          class="btn btn-primary w-full mt-8">
+            Top Up Sekarang
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- JUAL BELI -->
+  <section id="jual" class="page">
+
+    <div class="hero relative overflow-hidden">
+
+      <!-- Blur Effect -->
+    <div class="absolute top-[-180px] right-[-180px] w-[520px] h-[520px] bg-cyan-500/25 rounded-full blur-[150px] pointer-events-none"></div>
+
+    <div class="absolute bottom-[-220px] left-[-180px] w-[520px] h-[520px] bg-blue-950/35 rounded-full blur-[170px] pointer-events-none"></div>
+
+      <div>
+
+        <h1>
+          Jual Beli Akun
+        </h1>
+
+        <p>
+          Aman • Cepat • Terpercaya
+        </p>
+
+        <button class="btn btn-primary">
+          Chat Admin
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- KONTAK -->
+  <section id="kontak" class="page">
+
+    <div class="container-page">
+
+      <h1 class="judul">
+        Hubungi Kami
+      </h1>
+
+      <div class="kontak-grid">
+
+        <a href="https://wa.me/6281944123178"
+        class="kontak-card">
+
+          <i class="fab fa-whatsapp text-green-500"></i>
+
+          <h3 class="text-2xl font-bold">
+            WhatsApp
+          </h3>
+
+          <p class="text-zinc-400 mt-2">
+            +62 819-4412-3178
+          </p>
+
+        </a>
+
+        <a href="https://instagram.com/hdyyyyy25_"
+        class="kontak-card">
+
+          <i class="fab fa-instagram text-pink-500"></i>
+
+          <h3 class="text-2xl font-bold">
+            Instagram
+          </h3>
+
+          <p class="text-zinc-400 mt-2">
+            @hdyyyyy25_
+          </p>
+
+        </a>
+
+        <a href="mailto:hadyyyyyat25@gmail.com"
+        class="kontak-card">
+
+          <i class="fas fa-envelope"></i>
+
+          <h3 class="text-2xl font-bold">
+            Email
+          </h3>
+
+          <p class="text-zinc-400 mt-2">
+            hadyyyyyat25@gmail.com
+          </p>
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <script>
+
+    // MULTIPAGE
+
+    function showPage(pageId){
+
+      document.querySelectorAll('.page')
+      .forEach(page => {
+        page.classList.remove('active');
+      });
+
+      document.getElementById(pageId)
+      .classList.add('active');
+
+      document.querySelectorAll('.nav-link')
+      .forEach(link => {
+        link.classList.remove('active');
+      });
+
+      event.target.classList.add('active');
+
+      window.scrollTo({
+        top:0,
+        behavior:"smooth"
+      });
+    }
+
+    // TOPUP
+
+    const games = [
+      "Mobile Legends",
+      "PUBG Mobile",
+      "Free Fire",
+      "Valorant",
+      "Roblox"
+    ];
+
+    const nominals = [
+      {qty:"86 Diamond",price:15000},
+      {qty:"172 Diamond",price:30000},
+      {qty:"257 Diamond",price:45000},
+      {qty:"344 Diamond",price:60000},
+      {qty:"600 Diamond",price:100000},
+      {qty:"1200 Diamond",price:200000}
+    ];
+
+    let selectedGame = 0;
+    let selectedNominal = null;
+
+    function selectGame(index){
+
+      selectedGame = index;
+
+      document.querySelectorAll('.game-card')
+      .forEach((card,i)=>{
+        card.classList.toggle('active',i===index);
+      });
+
       updateSummary();
-      navigateTo('beranda');   // Mulai dari Beranda
-    };
+    }
+
+    function renderNominals(){
+
+      const container =
+      document.getElementById('nominalList');
+
+      container.innerHTML = '';
+
+      nominals.forEach((nom,i)=>{
+
+        const div =
+        document.createElement('div');
+
+        div.className =
+        `nominal ${
+          selectedNominal===i ? 'active' : ''
+        }`;
+
+        div.innerHTML = `
+          <p>${nom.qty}</p>
+          <p>Rp ${nom.price.toLocaleString('id-ID')}</p>
+        `;
+
+        div.onclick = ()=>{
+          selectedNominal = i;
+          renderNominals();
+          updateSummary();
+        };
+
+        container.appendChild(div);
+
+      });
+    }
+
+    function updateSummary(){
+
+      document.getElementById('summaryGame')
+      .textContent = games[selectedGame];
+
+      document.getElementById('summaryId')
+      .textContent =
+      document.getElementById('userId').value || '-';
+
+      if(selectedNominal !== null){
+
+        const nom =
+        nominals[selectedNominal];
+
+        document.getElementById('summaryNominal')
+        .textContent = nom.qty;
+
+        document.getElementById('summaryTotal')
+        .textContent =
+        'Rp ' + nom.price.toLocaleString('id-ID');
+      }
+    }
+
+    function prosesTopup(){
+
+      const uid =
+      document.getElementById('userId').value;
+
+      if(!uid){
+        alert('Masukkan User ID!');
+        return;
+      }
+
+      if(selectedNominal===null){
+        alert('Pilih nominal!');
+        return;
+      }
+
+      const nom =
+      nominals[selectedNominal];
+
+      alert(
+`✅ Pesanan Berhasil!
+
+Game : ${games[selectedGame]}
+User ID : ${uid}
+Nominal : ${nom.qty}
+Total : Rp ${nom.price.toLocaleString('id-ID')}
+
+Silakan chat admin untuk pembayaran.`
+      );
+    }
+
+    renderNominals();
+    updateSummary();
+
   </script>
+
 </body>
 </html>

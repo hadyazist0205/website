@@ -24,14 +24,14 @@
     }
   </style>
 </head>
-<body class="bg-zinc-950 text-white">
+<body class="bg-zinc-950 text-white scroll-smooth">
 
   <!-- Navbar -->
-  <nav class="bg-black/90 backdrop-blur-md border-b border-zinc-800 fixed w-full z-50">
+  <nav class="bg-black/70 backdrop-blur-xl border-b border-zinc-800 fixed w-full z-50 transition-all duration-300">
     <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
       <div class="flex items-center gap-3">
         <div class="w-10 h-10 bg-gradient-to-br from-cyan-500 to-purple-600 rounded-2xl flex items-center justify-center text-2xl font-bold">DG</div>
-        <h1 class="text-3xl font-bold tracking-tight">Dyy Game</h1>
+        <h1 class="text-3xl font-bold tracking-tight">DyyGame</h1>
       </div>
       
       <!-- Desktop Navbar -->
@@ -50,21 +50,25 @@
   </nav>
 
   <!-- ==================== BERANDA ==================== -->
-  <section id="beranda" class="pt-24 pb-20 bg-gradient-to-br from-zinc-900 via-zinc-950 to-black">
+  <section id="beranda" class="pt-24 pb-20 bg-gradient-to-br from-zinc-900 via-zinc-950 to-black transition-all duration-700 hover:scale-[1.001]">
     <div class="max-w-7xl mx-auto px-6 text-center">
-      <h1 class="text-6xl md:text-7xl font-bold mb-6">Selamat Datang</h1>
+      <h1 class="text-6xl md:text-7xl font-bold mb-6">Top Up Game Instan</h1>
       <p class="text-2xl text-zinc-400 mb-10">Mobile Legends • Free Fire • Roblox</p>
+      <button onclick="navigateTo('topup')" 
+              class="px-12 py-6 bg-white text-black font-bold text-xl rounded-3xl hover:bg-cyan-400 hover:scale-105 duration-300 shadow-lg hover:shadow-cyan-500/50"
+        Top Up Sekarang →
+      </button>
     </div>
   </section>
 
   <!-- ==================== TOP UP ==================== -->
-  <section id="topup" class="py-20 bg-zinc-900">
+  <section id="topup" class="py-20 bg-zinc-900 transition-all duration-700">
     <div class="max-w-6xl mx-auto px-6">
       <h2 class="text-4xl font-bold text-center mb-12">Pilih Game untuk Top Up</h2>
 
       <!-- Game Selection -->
       <div class="grid grid-cols-3 gap-6 mb-12" id="gameSelection">
-        <div onclick="selectGame(0)" id="game0" class="game-card active bg-zinc-800 border-2 border-cyan-400 rounded-3xl p-6 text-center cursor-pointer">
+        <div onclick="selectGame(0)" id="game0" class="game-card active bg-zinc-800 border-2 border-cyan-400 rounded-3xl p-6 text-center cursor-pointer hover:scale-105 hover:-translate-y-2 duration-300"
           <img src="https://m.media-amazon.com/images/M/MV5BODhlZDk5Y2EtMGFhOS00MTQ5LTgwNjgtYTI2ZmE1Y2ZjMDE2XkEyXkFqcGc@._V1_.jpg" class="h-20 mx-auto mb-4">
           <h3 class="font-bold">Mobile Legends</h3>
         </div>
@@ -116,7 +120,7 @@
   </section>
 
   <!-- ==================== JUAL BELI AKUN ==================== -->
-  <section id="jual" class="py-20 bg-black">
+  <section id="jual" class="py-20 bg-black transition-all duration-700">
     <div class="max-w-4xl mx-auto px-6 text-center">
       <h2 class="text-5xl font-bold mb-8">Jual Beli Akun Game</h2>
       <p class="text-xl text-zinc-400 mb-12">Jual Beli akun MLBB, Free Fire, atau Roblox dengan harga terbaik</p>
@@ -128,7 +132,7 @@
   </section>
 
   <!-- ==================== KONTAK ==================== -->
-  <section id="kontak" class="py-20 bg-zinc-900">
+  <section id="kontak" class="py-20 bg-zinc-900 transition-all duration-700">
     <div class="max-w-5xl mx-auto px-6 text-center">
       <h2 class="text-5xl font-bold mb-12">Hubungi Kami</h2>
       <div class="grid md:grid-cols-3 gap-8">
@@ -164,209 +168,18 @@
     ];
 
     function navigateTo(section) {
-      document.querySelectorAll('section').forEach(s => s.style.display = 'none');
-      document.getElementById(section).style.display = 'block';
+  document.getElementById(section).scrollIntoView({
+    behavior: "smooth"
+  });
 
-      // Update active nav
-      document.querySelectorAll('.nav-link').forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${section}`) link.classList.add('active');
-      });
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.classList.remove('active');
 
-      window.scrollTo({ top: 0, behavior: "smooth" });
+    if (link.getAttribute('href') === `#${section}`) {
+      link.classList.add('active');
     }
-
-    function selectGame(index) {
-      selectedGame = index;
-      document.querySelectorAll('.game-card').forEach((el, i) => {
-        el.classList.toggle('active', i === index);
-      });
-      updateSummary();
-    }
-
-    function renderNominals() {
-      const container = document.getElementById('nominalList');
-      container.innerHTML = '';
-      nominals.forEach((nom, i) => {
-        const div = document.createElement('div');
-        div.className = `p-4 rounded-2xl text-center cursor-pointer border transition-all ${selectedNominal === i ? 'bg-cyan-500 text-black border-cyan-400' : 'bg-zinc-800 border-zinc-700 hover:border-cyan-400'}`;
-        div.innerHTML = `<p class="font-bold">${nom.qty} Diamond</p><p class="text-emerald-400">Rp ${nom.price.toLocaleString('id-ID')}</p>`;
-        div.onclick = () => { selectedNominal = i; renderNominals(); updateSummary(); };
-        container.appendChild(div);
-      });
-    }
-
-    function updateSummary() {
-      document.getElementById('summaryGame').textContent = games[selectedGame];
-      document.getElementById('summaryId').textContent = document.getElementById('userId').value || "-";
-      if (selectedNominal !== null) {
-        const nom = nominals[selectedNominal];
-        document.getElementById('summaryNominal').textContent = `${nom.qty} Diamond`;
-        document.getElementById('summaryTotal').textContent = `Rp ${nom.price.toLocaleString('id-ID')}`;
-      }
-    }
-
-    function prosesTopup() {
-      const uid = document.getElementById('userId').value;
-      if (!uid) return alert("Masukkan User ID!");
-      if (selectedNominal === null) return alert("Pilih nominal top up!");
-
-      const nom = nominals[selectedNominal];
-      alert(`✅ Pesanan Top Up berhasil dibuat!\n\nGame: ${games[selectedGame]}\nUser ID: ${uid}\nNominal: ${nom.qty} Diamond\nTotal: Rp ${nom.price.toLocaleString('id-ID')}\n\nSilakan chat admin via WhatsApp untuk pembayaran.`);
-    }
-
-    function toggleSearch() {
-      const keyword = prompt("Cari game atau nominal:");
-      if (keyword) alert(`Mencari: ${keyword}`);
-    }
-
-    // Initialize
-    window.onload = () => {
-      renderNominals();
-      updateSummary();
-      navigateTo('beranda');   // Mulai dari Beranda
-    };
-  </script>
-</body>
-</html>      </div>
-    </div>
-
-    <!-- Right -->
-    <div class="relative flex justify-center">
-
-      <!-- Main Image -->
-      <img
-        src="https://images.alphacoders.com/132/1322308.jpeg"
-        class="w-[500px] rounded-[40px] shadow-[0_0_60px_rgba(34,211,238,0.4)] hover:scale-105 transition-all duration-700"
-      >
-
-      <!-- Floating Card ML -->
-      <div class="absolute -top-5 -left-5 bg-zinc-900/90 backdrop-blur-md border border-cyan-500/30 p-4 rounded-3xl shadow-xl animate-float">
-        <div class="flex items-center gap-4">
-          <img src="https://seeklogo.com/images/M/mobile-legends-bang-bang-logo-9A1FCA7E6D-seeklogo.com.png" class="w-14 h-14 object-contain">
-          <div>
-            <h3 class="font-bold">Mobile Legends</h3>
-            <p class="text-sm text-zinc-400">Diamond Murah</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Floating Card FF -->
-      <div class="absolute bottom-0 right-0 bg-zinc-900/90 backdrop-blur-md border border-purple-500/30 p-4 rounded-3xl shadow-xl animate-float2">
-        <div class="flex items-center gap-4">
-          <img src="https://upload.wikimedia.org/wikipedia/en/9/9c/Garena_Free_Fire_logo.svg" class="w-14 h-14 object-contain">
-          <div>
-            <h3 class="font-bold">Free Fire</h3>
-            <p class="text-sm text-zinc-400">Top Up Instan</p>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>        <div onclick="selectGame(2)" id="game2" class="game-card bg-zinc-800 border-2 border-transparent rounded-3xl p-6 text-center cursor-pointer">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Roblox_Corporation_2025_logo.svg/3840px-Roblox_Corporation_2025_logo.svg.png" class="h-20 mx-auto mb-4">
-          <h3 class="font-bold">Roblox</h3>
-        </div>
-      </div>
-
-      <div class="grid md:grid-cols-2 gap-10">
-        <!-- Form -->
-        <div class="bg-zinc-800 rounded-3xl p-8">
-          <h3 class="text-2xl font-semibold mb-6">Masukkan Data Akun</h3>
-          <div class="space-y-6">
-            <div>
-              <label class="block mb-2 text-sm">User ID / Nickname</label>
-              <input id="userId" type="text" class="w-full bg-zinc-900 border border-zinc-700 rounded-2xl px-6 py-5 focus:border-cyan-400 outline-none" placeholder="Contoh: 12345678" onkeyup="updateSummary()">
-            </div>
-            <div>
-              <label class="block mb-3 text-sm">Pilih Nominal</label>
-              <div class="grid grid-cols-3 gap-3" id="nominalList"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Summary -->
-        <div class="bg-zinc-800 rounded-3xl p-8">
-          <h3 class="text-2xl font-semibold mb-6">Ringkasan Pesanan</h3>
-          <div id="summary" class="space-y-5 text-lg">
-            <div class="flex justify-between"><span class="text-zinc-400">Game</span><span id="summaryGame" class="font-bold">Mobile Legends</span></div>
-            <div class="flex justify-between"><span class="text-zinc-400">User ID</span><span id="summaryId" class="font-bold">-</span></div>
-            <div class="flex justify-between"><span class="text-zinc-400">Nominal</span><span id="summaryNominal" class="font-bold text-emerald-400">-</span></div>
-            <hr class="border-zinc-700">
-            <div class="flex justify-between text-2xl font-bold">
-              <span>Total Bayar</span>
-              <span id="summaryTotal" class="text-emerald-400">Rp 0</span>
-            </div>
-          </div>
-          <button onclick="prosesTopup()" class="w-full mt-10 py-6 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-3xl text-xl font-bold hover:scale-105 transition-all">
-            Top Up Sekarang
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== JUAL BELI AKUN ==================== -->
-  <section id="jual" class="py-20 bg-black">
-    <div class="max-w-4xl mx-auto px-6 text-center">
-      <h2 class="text-5xl font-bold mb-8">Jual Beli Akun Game</h2>
-      <p class="text-xl text-zinc-400 mb-12">Jual Beli akun MLBB, Free Fire, atau Roblox dengan harga terbaik</p>
-      <button onclick="alert('Silakan chat admin untuk menjual/membeli akun')" 
-              class="px-16 py-6 bg-white text-black font-bold text-2xl rounded-3xl hover:bg-cyan-400">
-        Jual Beli Akun
-      </button>
-    </div>
-  </section>
-
-  <!-- ==================== KONTAK ==================== -->
-  <section id="kontak" class="py-20 bg-zinc-900">
-    <div class="max-w-5xl mx-auto px-6 text-center">
-      <h2 class="text-5xl font-bold mb-12">Hubungi Kami</h2>
-      <div class="grid md:grid-cols-3 gap-8">
-        <a href="https://wa.me/6281944123178" target="_blank" class="bg-zinc-800 hover:bg-green-600/20 p-10 rounded-3xl transition-all">
-          <i class="fab fa-whatsapp text-6xl text-green-500 mb-4"></i>
-          <h3 class="text-2xl font-semibold">WhatsApp</h3>
-          <p class="text-green-400">+6281944123178</p>
-        </a>
-        <a href="https://instagram.com/hdyyyyy25_" target="_blank" class="bg-zinc-800 hover:bg-pink-600/20 p-10 rounded-3xl transition-all">
-          <i class="fab fa-instagram text-6xl text-pink-500 mb-4"></i>
-          <h3 class="text-2xl font-semibold">Instagram</h3>
-          <p class="text-pink-400">@hdyyyyy25_</p>
-        </a>
-        <a href="mailto:hadyyyyyat25@gmail.com" class="bg-zinc-800 hover:bg-zinc-700 p-10 rounded-3xl transition-all">
-          <i class="fas fa-envelope text-6xl text-zinc-400 mb-4"></i>
-          <h3 class="text-2xl font-semibold">Email</h3>
-          <p class="text-zinc-400">hadyyyyyat25@gmail.com</p>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <script>
-    let selectedGame = 0;
-    let selectedNominal = null;
-
-    const games = ["Mobile Legends", "Free Fire", "Roblox"];
-
-    const nominals = [
-      {qty: "86", price: 15000}, {qty: "172", price: 30000},
-      {qty: "257", price: 45000}, {qty: "344", price: 60000},
-      {qty: "600", price: 100000}, {qty: "1200", price: 200000}
-    ];
-
-    function navigateTo(section) {
-      document.querySelectorAll('section').forEach(s => s.style.display = 'none');
-      document.getElementById(section).style.display = 'block';
-
-      // Update active nav
-      document.querySelectorAll('.nav-link').forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${section}`) link.classList.add('active');
-      });
-
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
+  });
+}
 
     function selectGame(index) {
       selectedGame = index;

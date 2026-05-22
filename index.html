@@ -126,37 +126,37 @@
     }
 
     .game-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-      gap:30px;
-    }
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:20px;
+}
 
-    .game-card{
-      background:#27272a;
-      border:2px solid transparent;
-      border-radius:30px;
-      padding:30px;
-      text-align:center;
-      transition:.3s;
-      cursor:pointer;
-    }
+.game-card{
+  background:#27272a;
+  border:2px solid transparent;
+  border-radius:24px;
+  padding:20px;
+  text-align:center;
+  transition:.3s;
+  cursor:pointer;
+}
 
-    .game-card:hover{
-      transform:translateY(-10px) scale(1.03);
-      border-color:cyan;
-    }
+.game-card:hover{
+  transform:translateY(-10px) scale(1.03);
+  border-color:cyan;
+}
 
-    .game-card.active{
-      border-color:cyan;
-      box-shadow:0 0 20px rgba(0,255,255,.4);
-    }
+.game-card.active{
+  border-color:cyan;
+  box-shadow:0 0 20px rgba(0,255,255,.4);
+}
 
-    .game-card img{
-      height:120px;
-      margin:auto;
-      margin-bottom:20px;
-      object-fit:contain;
-    }
+.game-card img{
+  height:85px;
+  margin:auto;
+  margin-bottom:15px;
+  object-fit:contain;
+}
 
     .topup-grid{
       display:grid;
@@ -229,6 +229,16 @@
     .kontak-card:hover{
       transform:translateY(-10px);
     }
+
+  .keunggulan-card{
+    transition: .35s ease;
+    cursor:pointer;
+  }
+
+  .keunggulan-card:hover{
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 0 30px rgba(0,255,255,.15);
+  }
 
     .kontak-card i{
       font-size:60px;
@@ -314,6 +324,19 @@
 
     <div class="max-w-7xl mx-auto px-6 py-32 relative z-10 w-full">
 
+    <!-- GABUNGAN TENGAH BAWAH (GESER SEDIKIT KE KANAN) -->
+    <div class="absolute bottom-[-250px] left-[56%]
+    -translate-x-1/2
+    w-[950px] h-[950px]
+    bg-gradient-to-r
+    from-cyan-400/25
+    via-blue-900/35
+    to-indigo-950/40
+    rounded-full
+    blur-[270px]
+    pointer-events-none">
+    </div>
+
       <!-- TEXT -->
       <div class="text-center">
 
@@ -371,7 +394,7 @@
         <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
 
           <!-- CARD -->
-          <div onclick="showPage('topup')"
+          <div onclick="goToTopup(0)"
           class="group bg-zinc-900 rounded-3xl overflow-hidden hover:scale-105 transition cursor-pointer border border-zinc-800 hover:border-cyan-400">
 
             <div class="overflow-hidden">
@@ -395,31 +418,7 @@
           </div>
 
           <!-- CARD -->
-          <div onclick="showPage('topup')"
-          class="group bg-zinc-900 rounded-3xl overflow-hidden hover:scale-105 transition cursor-pointer border border-zinc-800 hover:border-orange-400">
-
-            <div class="overflow-hidden">
-              <img
-              src="https://play-lh.googleusercontent.com/EJ83sg58Oo2gAjMHFxFVLM6Z53kuH4_R0M7Yq7gts5fWSIlFchUlmskG1vJKMoncmfOxBXcgJyIaO-nak6sO-MM"
-              class="h-44 w-full object-cover group-hover:scale-110 transition duration-500">
-            </div>
-
-            <div class="p-4">
-
-              <h3 class="font-bold text-lg">
-                Free Fire
-              </h3>
-
-              <p class="text-zinc-400 text-sm mt-1">
-                Diamond Instan
-              </p>
-
-            </div>
-
-          </div>
-
-          <!-- CARD -->
-          <div onclick="showPage('topup')"
+          <div onclick="goToTopup(1)"
           class="group bg-zinc-900 rounded-3xl overflow-hidden hover:scale-105 transition cursor-pointer border border-zinc-800 hover:border-red-400">
 
             <div class="overflow-hidden">
@@ -443,7 +442,31 @@
           </div>
 
           <!-- CARD -->
-          <div onclick="showPage('topup')"
+          <div onclick="goToTopup(2)"
+          class="group bg-zinc-900 rounded-3xl overflow-hidden hover:scale-105 transition cursor-pointer border border-zinc-800 hover:border-orange-400">
+
+            <div class="overflow-hidden">
+              <img
+              src="https://play-lh.googleusercontent.com/EJ83sg58Oo2gAjMHFxFVLM6Z53kuH4_R0M7Yq7gts5fWSIlFchUlmskG1vJKMoncmfOxBXcgJyIaO-nak6sO-MM"
+              class="h-44 w-full object-cover group-hover:scale-110 transition duration-500">
+            </div>
+
+            <div class="p-4">
+
+              <h3 class="font-bold text-lg">
+                Free Fire
+              </h3>
+
+              <p class="text-zinc-400 text-sm mt-1">
+                Diamond Instan
+              </p>
+
+            </div>
+
+          </div>
+
+          <!-- CARD -->
+          <div onclick="goToTopup(3)"
           class="group bg-zinc-900 rounded-3xl overflow-hidden hover:scale-105 transition cursor-pointer border border-zinc-800 hover:border-purple-400">
 
             <div class="overflow-hidden">
@@ -467,7 +490,7 @@
           </div>
 
           <!-- CARD -->
-          <div onclick="showPage('topup')"
+          <div onclick="goToTopup(4)"
           class="group bg-zinc-900 rounded-3xl overflow-hidden hover:scale-105 transition cursor-pointer border border-zinc-800 hover:border-green-400">
 
             <div class="overflow-hidden">
@@ -497,7 +520,7 @@
       <!-- KEUNGGULAN -->
       <div class="grid md:grid-cols-3 gap-8 mt-24">
 
-        <div class="bg-zinc-900/80 backdrop-blur-xl border border-zinc-800 rounded-3xl p-8 hover:border-cyan-400 transition">
+        <div class="keunggulan-card bg-zinc-900/80 backdrop-blur-xl border border-zinc-800 rounded-3xl p-8 hover:border-cyan-400 transition">
 
           <div class="w-16 h-16 rounded-2xl bg-cyan-500/20 flex items-center justify-center mb-6">
             <i class="fas fa-bolt text-cyan-400 text-3xl"></i>
@@ -513,7 +536,7 @@
 
         </div>
 
-        <div class="bg-zinc-900/80 backdrop-blur-xl border border-zinc-800 rounded-3xl p-8 hover:border-purple-400 transition">
+        <div class="keunggulan-card bg-zinc-900/80 backdrop-blur-xl border border-zinc-800 rounded-3xl p-8 hover:border-purple-400 transition">
 
           <div class="w-16 h-16 rounded-2xl bg-purple-500/20 flex items-center justify-center mb-6">
             <i class="fas fa-shield-halved text-purple-400 text-3xl"></i>
@@ -529,7 +552,7 @@
 
         </div>
 
-        <div class="bg-zinc-900/80 backdrop-blur-xl border border-zinc-800 rounded-3xl p-8 hover:border-emerald-400 transition">
+        <div class="keunggulan-card bg-zinc-900/80 backdrop-blur-xl border border-zinc-800 rounded-3xl p-8 hover:border-emerald-400 transition">
 
           <div class="w-16 h-16 rounded-2xl bg-emerald-500/20 flex items-center justify-center mb-6">
             <i class="fas fa-wallet text-emerald-400 text-3xl"></i>
@@ -551,6 +574,10 @@
 
   </div>
 
+  <div class="text-center text-zinc-600 text-sm py-6">
+    © Hady Azis T
+  </div>
+
 </section>
 
   <!-- TOPUP -->
@@ -570,7 +597,7 @@
       <div class="game-grid">
 
         <div onclick="selectGame(0)"
-        class="game-card active">
+        class="game-card topup-game active">
 
           <img src="https://m.media-amazon.com/images/M/MV5BODhlZDk5Y2EtMGFhOS00MTQ5LTgwNjgtYTI2ZmE1Y2ZjMDE2XkEyXkFqcGc@._V1_.jpg">
 
@@ -581,7 +608,7 @@
         </div>
 
         <div onclick="selectGame(1)"
-        class="game-card">
+        class="game-card topup-game">
 
           <img src="https://play-lh.googleusercontent.com/zCSGnBtZk0Lmp1BAbyaZfLktDzHmC6oke67qzz3G1lBegAF2asyt5KzXOJ2PVdHDYkU=w1024">
 
@@ -592,7 +619,7 @@
         </div>
 
         <div onclick="selectGame(2)"
-        class="game-card">
+        class="game-card topup-game">
 
           <img src="https://play-lh.googleusercontent.com/EJ83sg58Oo2gAjMHFxFVLM6Z53kuH4_R0M7Yq7gts5fWSIlFchUlmskG1vJKMoncmfOxBXcgJyIaO-nak6sO-MM">
 
@@ -603,7 +630,7 @@
         </div>
 
         <div onclick="selectGame(3)"
-        class="game-card">
+        class="game-card topup-game">
 
           <img src="https://store-images.s-microsoft.com/image/apps.21507.13663857844271189.4c1de202-3961-4c40-a0aa-7f4f1388775a.20ed7782-0eda-4f9d-b421-4cc47492edc6">
 
@@ -614,7 +641,7 @@
         </div>
 
         <div onclick="selectGame(4)"
-        class="game-card">
+        class="game-card topup-game">
 
           <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Roblox_Corporation_2025_logo.svg/3840px-Roblox_Corporation_2025_logo.svg.png">
 
@@ -698,36 +725,179 @@
 
     </div>
 
+    <div class="text-center text-zinc-600 text-sm py-6">
+      © Hady Azis T
+    </div>
+  
   </section>
 
   <!-- JUAL BELI -->
-  <section id="jual" class="page">
+  <section id="jual" class="page relative overflow-hidden bg-zinc-950">
 
-    <div class="hero relative overflow-hidden">
-
-      <!-- Blur Effect -->
+    <!-- Blur Effect -->
     <div class="absolute top-[-180px] right-[-180px] w-[520px] h-[520px] bg-cyan-500/25 rounded-full blur-[150px] pointer-events-none"></div>
 
     <div class="absolute bottom-[-220px] left-[-180px] w-[520px] h-[520px] bg-blue-950/35 rounded-full blur-[170px] pointer-events-none"></div>
 
-      <div>
+    <div class="container-page relative z-10">
 
-        <h1>
+      <!-- TITLE -->
+      <div class="text-center">
+
+        <h1 class="text-6xl font-black">
           Jual Beli Akun
         </h1>
 
-        <p>
+        <p class="text-zinc-400 text-xl mt-5">
           Aman • Cepat • Terpercaya
         </p>
 
-        <button class="btn btn-primary">
+      </div>
+
+      <!-- LIST GAME -->
+      <div class="mt-20">
+
+        <h2 class="text-3xl font-bold mb-8 text-center">
+          Pilih Game
+        </h2>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+
+          <!-- MOBILE LEGENDS -->
+          <div class="group bg-zinc-900 rounded-3xl overflow-hidden border border-zinc-800 hover:border-cyan-400 transition hover:scale-105 cursor-pointer">
+
+            <div class="overflow-hidden">
+              <img
+              src="https://assets-prd.ignimgs.com/2023/09/30/mobilelegends-1696089976653.jpg?crop=1%3A1%2Csmart&format=jpg&auto=webp&quality=80"
+              class="h-44 w-full object-cover group-hover:scale-110 transition duration-500">
+            </div>
+
+            <div class="p-4 text-center">
+
+              <h3 class="font-bold text-lg">
+                Mobile Legends
+              </h3>
+
+              <p class="text-zinc-400 text-sm mt-1">
+                Akun Sultan
+              </p>
+
+            </div>
+
+          </div>
+
+          <!-- PUBG -->
+          <div class="group bg-zinc-900 rounded-3xl overflow-hidden border border-zinc-800 hover:border-red-400 transition hover:scale-105 cursor-pointer">
+
+            <div class="overflow-hidden">
+              <img
+              src="https://play-lh.googleusercontent.com/zCSGnBtZk0Lmp1BAbyaZfLktDzHmC6oke67qzz3G1lBegAF2asyt5KzXOJ2PVdHDYkU=w1024"
+              class="h-44 w-full object-cover group-hover:scale-110 transition duration-500">
+            </div>
+
+            <div class="p-4 text-center">
+
+              <h3 class="font-bold text-lg">
+                PUBG Mobile
+              </h3>
+
+              <p class="text-zinc-400 text-sm mt-1">
+                Akun Rare
+              </p>
+
+            </div>
+
+          </div>
+
+          <!-- FREE FIRE -->
+          <div class="group bg-zinc-900 rounded-3xl overflow-hidden border border-zinc-800 hover:border-orange-400 transition hover:scale-105 cursor-pointer">
+
+            <div class="overflow-hidden">
+              <img
+              src="https://play-lh.googleusercontent.com/EJ83sg58Oo2gAjMHFxFVLM6Z53kuH4_R0M7Yq7gts5fWSIlFchUlmskG1vJKMoncmfOxBXcgJyIaO-nak6sO-MM"
+              class="h-44 w-full object-cover group-hover:scale-110 transition duration-500">
+            </div>
+
+            <div class="p-4 text-center">
+
+              <h3 class="font-bold text-lg">
+                Free Fire
+              </h3>
+
+              <p class="text-zinc-400 text-sm mt-1">
+                Akun Murah
+              </p>
+
+            </div>
+
+          </div>
+
+          <!-- VALORANT -->
+          <div class="group bg-zinc-900 rounded-3xl overflow-hidden border border-zinc-800 hover:border-purple-400 transition hover:scale-105 cursor-pointer">
+
+            <div class="overflow-hidden">
+              <img
+              src="https://store-images.s-microsoft.com/image/apps.21507.13663857844271189.4c1de202-3961-4c40-a0aa-7f4f1388775a.20ed7782-0eda-4f9d-b421-4cc47492edc6"
+              class="h-44 w-full object-cover group-hover:scale-110 transition duration-500">
+            </div>
+
+            <div class="p-4 text-center">
+
+              <h3 class="font-bold text-lg">
+                Valorant
+              </h3>
+
+              <p class="text-zinc-400 text-sm mt-1">
+                Skin Premium
+              </p>
+
+            </div>
+
+          </div>
+
+          <!-- ROBLOX -->
+          <div class="group bg-zinc-900 rounded-3xl overflow-hidden border border-zinc-800 hover:border-green-400 transition hover:scale-105 cursor-pointer">
+
+            <div class="overflow-hidden">
+              <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Roblox_Corporation_2025_logo.svg/3840px-Roblox_Corporation_2025_logo.svg.png"
+              class="h-44 w-full object-cover group-hover:scale-110 transition duration-500 bg-white">
+            </div>
+
+            <div class="p-4 text-center">
+
+              <h3 class="font-bold text-lg">
+                Roblox
+              </h3>
+
+              <p class="text-zinc-400 text-sm mt-1">
+                Akun Limited
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- BUTTON -->
+      <div class="text-center mt-16">
+
+        <button onclick="showPage('kontak')"
+        class="btn btn-primary">
           Chat Admin
         </button>
 
       </div>
 
     </div>
-
+  
+    <div class="text-center text-zinc-600 text-sm py-6">
+      © Hady Azis T
+    </div>
+  
   </section>
 
   <!-- KONTAK -->
@@ -790,6 +960,10 @@
 
     </div>
 
+    <div class="text-center text-zinc-600 text-sm py-6">
+      © Hady Azis T
+    </div>
+  
   </section>
 
   <script>
@@ -798,26 +972,57 @@
 
     function showPage(pageId){
 
-      document.querySelectorAll('.page')
-      .forEach(page => {
-        page.classList.remove('active');
-      });
+    document.querySelectorAll('.page')
+    .forEach(page => {
+      page.classList.remove('active');
+    });
 
-      document.getElementById(pageId)
+    document.getElementById(pageId)
+    .classList.add('active');
+
+    document.querySelectorAll('.nav-link')
+    .forEach(link => {
+      link.classList.remove('active');
+    });
+
+    // aktifkan navbar sesuai halaman
+    if(pageId === 'beranda'){
+      document.querySelectorAll('.nav-link')[0]
       .classList.add('active');
-
-      document.querySelectorAll('.nav-link')
-      .forEach(link => {
-        link.classList.remove('active');
-      });
-
-      event.target.classList.add('active');
-
-      window.scrollTo({
-        top:0,
-        behavior:"smooth"
-      });
     }
+
+    if(pageId === 'topup'){
+      document.querySelectorAll('.nav-link')[1]
+      .classList.add('active');
+    }
+
+    if(pageId === 'jual'){
+      document.querySelectorAll('.nav-link')[2]
+      .classList.add('active');
+    }
+
+    if(pageId === 'kontak'){
+      document.querySelectorAll('.nav-link')[3]
+      .classList.add('active');
+    }
+
+    window.scrollTo({
+      top:0,
+      behavior:"smooth"
+    });
+  }
+
+
+// FUNCTION SAAT KLIK GAME DI BERANDA
+function goToTopup(index){
+
+  // buka halaman topup
+  showPage('topup');
+
+  // pilih game sesuai index
+  selectGame(index);
+
+}
 
     // TOPUP
 
@@ -829,14 +1034,54 @@
       "Roblox"
     ];
 
-    const nominals = [
-      {qty:"86 Diamond",price:15000},
-      {qty:"172 Diamond",price:30000},
-      {qty:"257 Diamond",price:45000},
-      {qty:"344 Diamond",price:60000},
-      {qty:"600 Diamond",price:100000},
-      {qty:"1200 Diamond",price:200000}
-    ];
+    const nominalData = {
+
+      "Mobile Legends":[
+        {qty:"86 Diamond",price:15000},
+        {qty:"172 Diamond",price:30000},
+        {qty:"257 Diamond",price:45000},
+        {qty:"344 Diamond",price:60000},
+        {qty:"600 Diamond",price:100000},
+        {qty:"1200 Diamond",price:200000}
+      ],
+
+      "PUBG Mobile":[
+        {qty:"60 UC",price:16000},
+        {qty:"325 UC",price:75000},
+        {qty:"660 UC",price:150000},
+        {qty:"1800 UC",price:350000},
+        {qty:"3850 UC",price:700000},
+        {qty:"8100 UC",price:1400000}
+      ],
+
+      "Free Fire":[
+        {qty:"70 Diamond",price:10000},
+        {qty:"140 Diamond",price:20000},
+        {qty:"355 Diamond",price:50000},
+        {qty:"720 Diamond",price:100000},
+        {qty:"1450 Diamond",price:200000},
+        {qty:"3640 Diamond",price:500000}
+      ],
+
+      "Valorant":[
+        {qty:"125 VP",price:15000},
+        {qty:"420 VP",price:50000},
+        {qty:"700 VP",price:80000},
+        {qty:"1375 VP",price:150000},
+        {qty:"2400 VP",price:250000},
+        {qty:"4000 VP",price:400000}
+      ],
+
+      "Roblox":[
+        {qty:"80 Robux",price:15000},
+        {qty:"400 Robux",price:75000},
+        {qty:"800 Robux",price:150000},
+        {qty:"1700 Robux",price:300000},
+        {qty:"4500 Robux",price:750000},
+        {qty:"10000 Robux",price:1500000}
+      ]
+
+    };
 
     let selectedGame = 0;
     let selectedNominal = null;
@@ -845,7 +1090,10 @@
 
       selectedGame = index;
 
-      document.querySelectorAll('.game-card')
+      selectedNominal = null;
+      renderNominals();
+
+      document.querySelectorAll('.topup-game')
       .forEach((card,i)=>{
         card.classList.toggle('active',i===index);
       });
@@ -859,6 +1107,12 @@
       document.getElementById('nominalList');
 
       container.innerHTML = '';
+
+      const currentGame =
+      games[selectedGame];
+
+      const nominals =
+      nominalData[currentGame];
 
       nominals.forEach((nom,i)=>{
 
@@ -898,7 +1152,7 @@
       if(selectedNominal !== null){
 
         const nom =
-        nominals[selectedNominal];
+        nominalData[games[selectedGame]][selectedNominal];
 
         document.getElementById('summaryNominal')
         .textContent = nom.qty;
@@ -925,7 +1179,7 @@
       }
 
       const nom =
-      nominals[selectedNominal];
+      nominalData[games[selectedGame]][selectedNominal];
 
       alert(
 `✅ Pesanan Berhasil!

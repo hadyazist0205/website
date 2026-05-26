@@ -714,10 +714,9 @@
 
           </div>
 
-          <button id="topupBtn"
-onclick="prosesTopup()"
-class="btn btn-primary w-full mt-8">
-  Top Up Sekarang
+          <button onclick="prosesTopup()"
+          class="btn btn-primary w-full mt-8">
+            Top Up Sekarang
           </button>
 
         </div>
@@ -1187,53 +1186,23 @@ function goToTopup(index){
       }
     }
 
-async function prosesTopup(){
+    function prosesTopup(){
 
-  const uid =
-  document.getElementById('userId').value;
+      const uid =
+      document.getElementById('userId').value;
 
-  if(!uid){
-    alert('Masukkan User ID!');
-    return;
-  }
-
-  if(selectedNominal === null){
-    alert('Pilih nominal!');
-    return;
-  }
-
-  const nom =
-  nominalData[games[selectedGame]][selectedNominal];
-
-  // DATA YANG AKAN DIKIRIM
-  const data = {
-    game: games[selectedGame],
-    userId: uid,
-    nominal: nom.qty,
-    total: 'Rp ' + nom.price.toLocaleString('id-ID')
-  };
-
-  const btn =
-  document.getElementById('topupBtn');
-
-  try{
-
-    btn.innerText = 'Mengirim...';
-    btn.disabled = true;
-
-    const response = await fetch(
-      'https://formspree.io/f/xkoeqqqn',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify(data)
+      if(!uid){
+        alert('Masukkan User ID!');
+        return;
       }
-    );
 
-    if(response.ok){
+      if(selectedNominal===null){
+        alert('Pilih nominal!');
+        return;
+      }
+
+      const nom =
+      nominalData[games[selectedGame]][selectedNominal];
 
       alert(
 `✅ Pesanan Berhasil!
@@ -1243,38 +1212,14 @@ User ID : ${uid}
 Nominal : ${nom.qty}
 Total : Rp ${nom.price.toLocaleString('id-ID')}
 
-Pesanan sudah masuk ke email admin.`
+Silakan chat admin untuk pembayaran.`
       );
-
-      // RESET FORM
-      document.getElementById('userId').value = '';
-      selectedNominal = null;
-
-      renderNominals();
-      updateSummary();
-
-    }else{
-
-      alert('Gagal mengirim pesanan!');
-
     }
 
-  }catch(error){
-
-    alert('Terjadi error!');
-    console.log(error);
-
-  }
-
-  // KEMBALIKAN TOMBOL
-  btn.innerText = 'Top Up Sekarang';
-  btn.disabled = false;
-
-    }
-
-    }
+    renderNominals();
+    updateSummary();
 
   </script>
 
 </body>
-</html>
+        </html>

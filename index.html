@@ -714,9 +714,10 @@
 
           </div>
 
-          <button onclick="prosesTopup()"
-          class="btn btn-primary w-full mt-8">
-            Top Up Sekarang
+          <button id="topupBtn"
+onclick="prosesTopup()"
+class="btn btn-primary w-full mt-8">
+  Top Up Sekarang
           </button>
 
         </div>
@@ -1186,23 +1187,53 @@ function goToTopup(index){
       }
     }
 
-    function prosesTopup(){
+async function prosesTopup(){
 
-      const uid =
-      document.getElementById('userId').value;
+  const uid =
+  document.getElementById('userId').value;
 
-      if(!uid){
-        alert('Masukkan User ID!');
-        return;
+  if(!uid){
+    alert('Masukkan User ID!');
+    return;
+  }
+
+  if(selectedNominal === null){
+    alert('Pilih nominal!');
+    return;
+  }
+
+  const nom =
+  nominalData[games[selectedGame]][selectedNominal];
+
+  // DATA YANG AKAN DIKIRIM
+  const data = {
+    game: games[selectedGame],
+    userId: uid,
+    nominal: nom.qty,
+    total: 'Rp ' + nom.price.toLocaleString('id-ID')
+  };
+
+  try{
+
+    const btn =
+document.getElementById('topupBtn');
+
+btn.innerText = 'Mengirim...';
+btn.disabled = true;
+
+    const response = await fetch(
+      'https://formspree.io/f/xkoeqqqn',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(data)
       }
+    );
 
-      if(selectedNominal===null){
-        alert('Pilih nominal!');
-        return;
-      }
-
-      const nom =
-      nominalData[games[selectedGame]][selectedNominal];
+    if(response.ok){
 
       alert(
 `✅ Pesanan Berhasil!
@@ -1212,12 +1243,41 @@ User ID : ${uid}
 Nominal : ${nom.qty}
 Total : Rp ${nom.price.toLocaleString('id-ID')}
 
-Silakan chat admin untuk pembayaran.`
+Pesanan sudah masuk ke email admin.`
       );
+
+      // RESET FORM
+      document.getElementById('userId').value = '';
+      selectedNominal = null;
+
+      renderNominals();
+      updateSummary();
+
+      btn.innerText = 'Top Up Sekarang';
+btn.disabled = false;
+
+    }else{
+
+  btn.innerText = 'Top Up Sekarang';
+  btn.disabled = false;
+
+  alert('Gagal mengirim pesanan!');
     }
 
-    renderNominals();
-    updateSummary();
+  catch(error){
+
+  const btn =
+  document.getElementById('topupBtn');
+
+  btn.innerText = 'Top Up Sekarang';
+  btn.disabled = false;
+
+  alert('Terjadi error!');
+  console.log(error);
+
+  }
+
+    }
 
   </script>
 

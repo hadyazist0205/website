@@ -1213,13 +1213,13 @@ async function prosesTopup(){
     total: 'Rp ' + nom.price.toLocaleString('id-ID')
   };
 
+  const btn =
+  document.getElementById('topupBtn');
+
   try{
 
-    const btn =
-document.getElementById('topupBtn');
-
-btn.innerText = 'Mengirim...';
-btn.disabled = true;
+    btn.innerText = 'Mengirim...';
+    btn.disabled = true;
 
     const response = await fetch(
       'https://formspree.io/f/xkoeqqqn',
@@ -1253,29 +1253,24 @@ Pesanan sudah masuk ke email admin.`
       renderNominals();
       updateSummary();
 
-      btn.innerText = 'Top Up Sekarang';
-btn.disabled = false;
-
     }else{
 
-  btn.innerText = 'Top Up Sekarang';
-  btn.disabled = false;
+      alert('Gagal mengirim pesanan!');
 
-  alert('Gagal mengirim pesanan!');
     }
 
-  catch(error){
+  }catch(error){
 
-  const btn =
-  document.getElementById('topupBtn');
+    alert('Terjadi error!');
+    console.log(error);
 
+  }
+
+  // KEMBALIKAN TOMBOL
   btn.innerText = 'Top Up Sekarang';
   btn.disabled = false;
 
-  alert('Terjadi error!');
-  console.log(error);
-
-  }
+    }
 
     }
 
